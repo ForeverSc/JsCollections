@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>close</title>
+  <style>
+
+ .window{
+  position: relative;
+  width: 400px;
+  height: 300px;
+  line-height: 300px;
+  margin: 100px auto;
+  border:1px solid #000;
+  text-align: center;
+ }
+ 
+ .close{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;/*line-height可以继承，所以不设置会继承父类window的值*/
+  text-align: center;
+  border:1px solid #000;
+  left: 400px;
+  margin-left: -20px;
+  margin-top: -320px;/*由于有行高影响需要利用margin-top向上*/
+ }
+
+
+
+  </style>
+</head>
+<body>
+ <div class="window">
+   close  
+    <div class="close">X</div>
+ </div>
+ <script>
+   var dWindow=document.getElementsByClassName("window")[0],
+       dClose=document.getElementsByClassName("close")[0];
+       dClose.onclick=function(){
+          dWindow.style.display="none";
+       }
+
+ </script>
+
+  
+</body>
+</html>

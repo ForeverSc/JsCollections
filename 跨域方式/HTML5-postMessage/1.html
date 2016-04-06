@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+ <iframe src="./test.html" frameborder="0"></iframe>
+  <script>
+    window.onload=function(){
+      var ifr=document.getElementsByTagName("iframe")[0];
+      var targetOrigin="http://localhost:8080/test.html";
+      ifr.contentWindow.postMessage("i was there",targetOrigin);//通过postMessage实现跨域数据传送
+    };
+
+  </script>
+  
+</body>
+</html>

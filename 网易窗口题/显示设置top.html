@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>close</title>
+  <style>
+.container{
+
+}
+
+ .window{
+  position: relative;
+  width: 400px;
+  height: 300px;
+  line-height: 300px;
+  margin: 100px auto;
+  border:1px solid #000;
+  text-align: center;/*注意div文字的居中*/
+ }
+ 
+ .close{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;/*line-height可以继承，所以不设置会继承父类window的值*/
+  text-align: center;
+  border:1px solid #000;
+  left: 400px;
+  top:0;/*假如没有显示设置top的值，就会被上面的文本流的line-height给撑开，所以用了absolute还是显示设置为好*/
+  margin-left: -20px;
+  margin-top: -20px;
+ }
+
+
+
+  </style>
+</head>
+<body>
+ <div class="window">
+   close  
+    <div class="close">X</div>
+ </div>
+ <script>
+   var dWindow=document.getElementsByClassName("window")[0],
+       dClose=document.getElementsByClassName("close")[0];
+       dClose.onclick=function(){
+          dWindow.style.display="none";
+       }
+
+ </script>
+
+  
+</body>
+</html>

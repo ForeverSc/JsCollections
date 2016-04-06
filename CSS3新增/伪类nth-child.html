@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nth-child</title>
+  <style>
+  /*注意是用在li上的，不是ul上*/
+  /*计数从1开始*/
+    li:nth-child(odd){
+      color:#a00;
+    
+    }
+    li:nth-child(4){
+      font-size: 40px;
+      /*文字镂空效果*/
+      -webkit-text-fill-color:transparent;
+      -webkit-text-stroke:1px #000;
+    }
+    li:nth-child(2n+1){
+      /*n从0开始*/
+      font-size: 20px;
+      color: #a00;
+      -webkit-box-reflect: below 1px linear-gradient(transparent,transparent 50%,rgba(0,0,0,.3));
+    }
+    li:nth-child(3){
+      font-size: 30px;
+      text-shadow: 2px 2px 5px #000;
+      background-color:rgba(0,0,0,.5);
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>呵呵</li>
+    <li>GOOD</li>
+  </ul>
+  
+</body>
+</html>

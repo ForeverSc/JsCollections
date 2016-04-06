@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            background: #ccc;
+        }
+        
+        .transition:hover{
+            width: 200px;
+            transition: width 5s;
+            -moz-transition: width 5s;
+            /* Firefox 4 */
+            -webkit-transition: width 5s;
+            /* Safari 和 Chrome */
+            -o-transition: width 5s;
+            /* Opera */
+        }
+        
+        .animation {
+            animation: myfirst 5s;
+            -moz-animation: myfirst 5s;
+            /* Firefox */
+            -webkit-animation: myfirst 5s;
+            /* Safari and Chrome */
+            -o-animation: myfirst 5s;
+            /* Opera */
+        }
+        
+        @-webkit-keyframes myfirst
+        /* Safari and Chrome */
+        
+        {
+            from {
+                width: 100px;
+            }
+            to {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="transition">transition</div>
+
+    <div class="animation">animation</div>
+
+    <script>
+        var divTransition = document.getElementsByClassName("transition")[0];
+        var divaAnimation = document.getElementsByClassName("animation")[0];
+        divTransition.onclick = function(e) {
+            alert(window.getComputedStyle(e.target,null).getPropertyValue("width"));
+        }
+        divaAnimation.onclick=function(e){
+            alert(e.target.offsetWidth);
+        }
+        
+    </script>
+</body>
+
+</html>

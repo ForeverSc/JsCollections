@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Draggble</title>
+    <style>
+        .drag {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            background: #eee;
+        }
+        
+        .drop {
+            width: 300px;
+            height: 300px;
+            margin-top: 200px;
+            background: #a00;
+        }
+        /*safari中需要加入这个*/
+        
+        .drop[draggable=true] {
+            -khtml-user-drag: element;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <div class="drag" draggable="true">Draggable</div>
+
+    <div class="drop">
+    </div>
+
+    <script>
+        //ie10+ draggable才支持
+        window.onload = function() {
+            var body = document.getElementsByTagName("body")[0],
+                dragDiv = document.getElementsByTagName("div")[0],
+                dropDiv = document.getElementsByTagName("div")[1];
+
+            //设置和接受文本数据,firefox下必须设置,否则没有拖动效果
+            dragDiv.ondragstart = function(event) {
+                event.dataTransfer.setData('Text', this.className);
+                event.dataTransfer.setData("URL", "http://...");
+               // event.dataTransfer.effectAllowed="move";
+            };
+
+            
+            //要使用dropEffect必须在ondragenter中设置
+            dropDiv.ondragenter = function(event) {
+                event = event || window.event;
+                
+                
+                
+                event.preventDefault();
+            };
+            dropDiv.ondragover = function(event) {
+              //event.dataTransfer.dropEffect="move";
+                event = event || window.event;
+                event.preventDefault();
+            };
+
+            //注意数据只能在ondrop中读取
+           dropDiv.ondrop = function(event) {
+               event = event || window.event;
+               //接受文本
+               var text = event.dataTransfer.getData('Text');
+               //接受URL
+               var url = event.dataTransfer.getData("url") || event.dataTransfer.getData("text/uri-list");
+
+
+               var textNode = document.createTextNode(text);
+               dragDiv.appendChild(textNode);
+               this.appendChild(dragDiv);
+
+               if (event.preventDefault) {
+                   event.preventDefault();
+               }
+               //firefox中还是会打开新标签页？？？
+               event.returnValue = false;
+           }
+
+        };
+    </script>
+</body>
+
+</html>

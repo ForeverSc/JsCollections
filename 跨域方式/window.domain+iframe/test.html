@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>判断数字是否为两位数</title>
+<style>
+body{font:12px/1.5 arial;text-align:center;}
+.f-text{width:50px;border:1px solid #ccc;background:#f0f0f0;font-family:inherit;padding:3px;margin-right:10px;}
+</style>
+<script type="text/javascript">
+window.onload = function ()
+{
+        document.domain="localhost";//设置为相同的domain
+        var oInput=document.getElementsByTagName("input")[0];
+        var oBtn=document.getElementsByTagName("input")[1];
+        oInput.onkeyup=function(){
+            this.value=this.value.replace(/\D/,"");
+        };
+            
+};
+
+</script>
+</head>
+<body>
+<h1>zzzz</h1>
+<input type="text" class="f-text" /><input type="button" value="是否为两位数" />
+</body>
+</html>

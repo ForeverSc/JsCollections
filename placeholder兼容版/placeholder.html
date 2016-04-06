@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prompt</title>
+
+  <style>
+  #container{
+    width: 300px;
+  }
+  
+  #container input{
+    width: 150px;
+  }
+
+  #placeholder{
+    position: relative;
+    color: #ccc;
+    left: -150px;
+  }
+  </style>
+</head>
+<body>
+<!--利用相对定位元素模拟placeholder效果-->
+<div id="container"><label for="">用户名 </label><input type="text" id="input" ><span id="placeholder">请输入</span></div>
+ 
+<script>
+  /*方法1.对于支持placeholder属性的浏览器。可以暂且认为除了老版本的IE系列浏览器都支持这个属性。可以直接在input标签上附加属性，如下：
+<input type="password" name="pwd" placeholder="请输入密码" />
+方法2.对于不支持placeholder属性的浏览器，使用一个相对定位的元素，使其偏移，浮在输入框上方。当用户点击这个偏移元素，或输入框获得焦点时，隐藏这个偏移元素，来模拟placeholder的效果*/
+  window.onload=function(){
+    var input=document.getElementById("input"),
+        placeholder=document.getElementById("placeholder");
+        function clearPlaceholder(){
+          placeholder.style.display="none";
+        }
+        function showPlaceholder(){
+          placeholder.style.display="inline";
+        }
+
+        input.onfocus=clearPlaceholder;
+        placeholder.onclick=function(){
+          clearPlaceholder();
+          input.focus();
+        };
+        input.onblur=showPlaceholder;
+        input.onkeyup=function(){
+          if(input.value===""){
+            showPlaceholder();
+          }else{
+            clearPlaceholder();
+          }
+        };
+
+    
+    
+   
+
+
+
+
+  };
+
+</script>
+
+
+</body>
+</html>

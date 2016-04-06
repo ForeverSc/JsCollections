@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>box-sizing</title>
+  <style>
+  div{
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    padding: 10px;
+    background: #ccc;
+    border:10px solid #eee;
+  }
+  /*ie<=7时标准模式时不支持该属性，只会默认显示content-box*/
+  /*回答盒子模型时引入*/
+  .content-box{
+    box-sizing:content-box;
+    
+  }
+  .border-box{
+    box-sizing:border-box;
+
+  }
+
+  </style>
+</head>
+<body>
+
+<div class="content-box">content-box</div>
+<div class="border-box">border-box</div>
+  
+</body>
+</html>

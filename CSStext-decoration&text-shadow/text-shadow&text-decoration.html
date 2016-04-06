@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>box-sizing</title>
+  <style>
+  div{
+    width: 200px;
+    height: 200px;
+    margin: 50px;
+    padding: 10px;
+    background: #ccc;
+    border:10px solid #eee;
+  }
+  /*ie<=7时标准模式时不支持该属性，只会默认显示content-box*/
+  .content-box{
+    box-sizing:content-box;
+    
+  }
+  .border-box{
+    box-sizing:border-box;
+
+  }
+  p{
+    color:#f00;
+    text-decoration: underline;
+    text-shadow: 1px 1px 5px #000;
+  }
+
+  strong{
+    color:#000;
+    text-decoration: underline;
+    /*去不掉strong字体底部的underline,最多只能将text-decoration也设置为underline来覆盖
+    不同浏览器中的表现，需要测试*/
+  }
+
+  </style>
+</head>
+<body>
+
+<div class="content-box">content-box</div>
+<div class="border-box">border-box</div>
+  <p>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh <strong>safadsfs</strong>sssssss</p>
+</body>
+</html>

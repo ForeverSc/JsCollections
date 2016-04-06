@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>close</title>
+  <style>
+ #autocomplete{
+  position: relative;
+  width: 200px;
+  margin-bottom: 20px;
+  padding: 0;
+ }
+
+ #username{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+ }
+
+  ul{
+    display: none;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background: #fff;
+    border:1px solid #000;
+    border-top: 0;
+  }
+
+  ul li:hover{
+    background: #eee;
+  }
+
+
+
+
+  </style>
+</head>
+<body>
+<div id="autocomplete">
+ <input type="text" name="username" id="username" autocomplete="off">
+ <ul class="combox">
+ </ul>
+ </div>
+ <input type="text" name="password" id="password">
+ <input type="button" value="submit" id="submit">
+ <input type="button" value="show" id="show">
+
+ <script>
+
+ window.onload=function(){
+
+ var username=document.getElementById("username"),
+     password=document.getElementById("password"),
+     subBtn=document.getElementById("submit"),
+     showBtn=document.getElementById("show");
+ function setCookie(name,value,expires,path,domain,secure){
+    var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+    if(expires instanceof Date){
+      cookieText+="; expires="+expires.toGMTString();
+    }
+    if(path){
+      cookieText+="; path="+path;
+    }
+    if(domain){
+      cookieText+="; domain="+domain;
+    }
+    if(secure){
+      cookieText+="; secure";
+    }
+    document.cookie=cookieText;    
+ } 
+
+ //改为正则捕获
+ function getCookie(name){
+  var reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"),
+      arr=null;
+  if(arr=document.cookie.match(reg)){
+    return decodeURIComponent(arr[2]);//RegExp.$2;
+  }else{
+    return;
+  }
+ }
+
+function unset(name,path,domain,secure){
+  setCookie(name,"",new Date(0),path,domain,secure);
+}
+
+
+ subBtn.onclick=function(){
+  setCookie(username.value,password.value,new Date(2017,1,1),"/","localhost");
+ };
+  
+ showBtn.onclick=function(){
+   password.value=getCookie(username.value);
+ }
+
+ /*下拉框部分*/
+ var autocomplete=document.getElementById("autocomplete"),
+     combox=autocomplete.getElementsByTagName("ul")[0], 
+     prompt=combox.getElementsByTagName("li");
+ 
+username.onkeyup=function(){
+  var cookieValue=getCookie(username.value);
+  if(cookieValue){
+    combox.innerHTML=null;
+    var promptLi=document.createElement("li");
+    promptLi.innerHTML=cookieValue;
+    //需要在添加时为其绑定事件
+    promptLi.onmousedown=function(){
+      username.value=this.innerHTML;
+      combox.style.display="none";
+    }
+    combox.appendChild(promptLi);
+    combox.style.display="block";
+  }else{
+    combox.style.display="none";
+  }
+
+}
+
+
+
+/*新添加的li无法为其绑定事件*/
+// for(var i=0;i<prompt.length;i++){
+//   (function(i){
+//    prompt[i].onmousedown=function(event){
+//     console.log(this.innerHTML);
+//       var event=event||window.event,
+//          target=event.target||event.srcElement;
+//      username.value=this.innerHTML;
+//    }
+//   })(i);
+// }
+
+
+
+
+
+ 
+
+
+
+
+
+
+ }
+ 
+ </script>
+
+  
+</body>
+</html>

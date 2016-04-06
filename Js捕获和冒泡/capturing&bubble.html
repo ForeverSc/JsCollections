@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>event capturing bubble </title>
+  <style>
+  #outer{
+    background: #a00;
+    width: 300px;
+    height: 300px;
+    border:1px solid #eee;
+  }
+
+  #inner{
+    background:#0f0;
+    width: 100px;
+    height: 100px;
+    margin: 100px;
+    border:1px solid #eee;
+  }
+
+
+  </style>
+</head>
+<body>
+  <div id="outer">
+    <div id="inner"></div>
+  </div>
+  <script>
+    var outer=document.getElementById("outer"),
+        inner=document.getElementById("inner");
+    /*冒泡，点击inner会先出现inner，然后出现outer，点击outer则只会出现outer*/
+    
+    // outer.onclick=function(){
+    //   alert("outer");
+    // };
+    // inner.onclick=function(){
+    //   alert("inner");
+    // };
+    
+
+    /*先发生捕获事件，然后再发生冒泡事件*/
+    // outer.addEventListener("click",function(){
+    //   alert("outer capturing");
+    // },true);
+
+    // inner.addEventListener("click",function(){
+    //   alert("inner");
+    // },false);//这里true或false都没有影响
+
+    // outer.addEventListener("click",function(){
+    //   alert("outer bubble");
+    // },false);
+
+
+    /*因为把事件处理程序绑定在目标上，所以无论false还是true都是一样的结果，按照添加处理程序的顺序依次执行*/
+    inner.addEventListener("click",function(){
+      alert("inner1");
+    },true);
+    inner.addEventListener("click",function(){
+      alert("inner2");
+    },false);
+
+
+
+
+
+
+  </script>
+
+</body>
+</html>

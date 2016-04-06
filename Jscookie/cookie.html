@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>close</title>
+  <style>
+
+
+
+
+  </style>
+</head>
+<body>
+ <input type="text" name="username" id="username">
+ <input type="text" name="password" id="password">
+ <input type="button" value="submit" id="submit">
+ <input type="button" value="show" id="show">
+
+
+
+ <script>
+
+ window.onload=function(){
+
+ var username=document.getElementById("username"),
+     password=document.getElementById("password"),
+     subBtn=document.getElementById("submit"),
+     showBtn=document.getElementById("show");
+ function setCookie(name,value,expires,path,domain,secure){
+    var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+    if(expires instanceof Date){
+      cookieText+="; expires="+expires.toGMTString();
+    }
+    if(path){
+      cookieText+="; path="+path;
+    }
+    if(domain){
+      cookieText+="; domain="+domain;
+    }
+    if(secure){
+      cookieText+="; secure";
+    }
+    document.cookie=cookieText;    
+ } 
+
+ function getCookie(name){
+  var cookieName=encodeURIComponent(name)+"=",
+      cookieStart=document.cookie.indexOf(cookieName),
+      cookieValue=null;
+  if(cookieStart>-1){
+    var cookieEnd=document.cookie.indexOf(";",cookieStart);
+    if(cookieEnd===-1){//最后一个
+        cookieEnd=document.cookie.length;
+    }
+    cookieValue=decodeURIComponent(document.cookie.slice(cookieStart+cookieName.length,cookieEnd));
+  }
+
+  return cookieValue;
+ }
+
+function unset(name,path,domain,secure){
+  setCookie(name,"",new Date(0),path,domain,secure);
+}
+
+
+
+ subBtn.onclick=function(){
+  setCookie(username.value,password.value,new Date(0),"/","localhost");
+ };
+  
+ showBtn.onclick=function(){
+   password.value=getCookie(username.value);
+ }
+
+
+
+ }
+ 
+
+ </script>
+
+  
+</body>
+</html>

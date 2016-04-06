@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    window.onload=function(){
+      document.domain="localhost";//设置为相同的domain
+      var ifr=document.createElement("iframe");
+      ifr.src="./test.html";
+      ifr.style.display="none";
+      document.body.appendChild(ifr);
+      ifr.onload=function(){
+        var doc=ifr.contentDocument||ifr.contentWindow.document;//！！！
+        alert(doc.getElementsByTagName("h1")[0].innerHTML);
+      };
+    };
+
+  </script>
+  
+</body>
+</html>

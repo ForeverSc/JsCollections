@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>  
+</head>
+<body>
+<input id="input" value="2">
+
+<script>
+
+window.onload=function(){
+  var data=[2,3,5,1,0],
+      worker=new Worker("webworker.js");
+      worker.onmessage=function(event){
+        var data=event.data;
+        console.log(data);
+      }
+      worker.postMessage(data);
+}
+
+</script>
+</body>
+</html>
