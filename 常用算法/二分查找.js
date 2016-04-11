@@ -1,4 +1,4 @@
-//二分查找
+//二分查找，先要对数组进行排序
 //可以修改下start=start||0; end=end||arr.length-1
 function midFind(arr,start,end,find){
   var midIndex=Math.floor((start+end)/2),
