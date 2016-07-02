@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播-幻灯片版</title>
+    <style>
+    .container,
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        position: relative;
+        width: 490px;
+        height: 170px;
+        margin: auto;
+    }
+    
+    ul {
+        list-style-type: none;
+    }
+    
+    li {
+        display: inline-block;
+    }
+    
+    .list {
+        width: 490px;
+        height: 170px;
+        margin: auto;
+        padding: 0;
+        overflow: hidden;
+        border: 10px solid #ccc;
+        border-radius: 10px;
+    }
+
+    .list li{
+      display: none;
+    }
+
+    .list li.current{
+      display: inline-block;
+    }
+
+    
+    .index {
+        position: absolute;
+        bottom: 2px;
+        right: 5px;
+    }
+    
+    .index li {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background: #0a0;
+        border-radius: 20px;
+        color: #fff;
+        text-align: center;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+    
+    .index li:hover {
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+
+    .index li.current{
+        opacity: 1;
+        filter: alpha(opacity=100);
+    }
+    
+    img {
+        width: 490px;
+        height: 170px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="list">
+            <li class="current"><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+            <li><img src="img/4.jpg" alt=""></li>
+            <li><img src="img/5.jpg" alt=""></li>
+        </ul>
+        <ul class="index">
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <script>
+    window.onload = function() {
+        var ul = document.getElementsByTagName("ul"),
+            list = ul[0],
+            index = ul[1],
+            listLi = list.getElementsByTagName("li"),
+            indexLi = index.getElementsByTagName("li"),
+            timer = null,
+            autoTimer=null,
+            i=0;
+
+        //绑定事件
+        for (var i = 0; i < indexLi.length; i++) {
+            (function(i) {
+                indexLi[i].onmouseover = function() {
+                    clearInterval(autoTimer);//关闭自动播放
+                    play(i);
+                };
+                indexLi[i].onmouseout=function(){
+                    autoPlay();
+                };
+
+            })(i);
+        }
+        //都相同，绑定到父类元素上
+        // list.onmouseout=function(){
+        //   autoPlay();//自动播放
+        // }
+
+        
+        //自动播放
+        function autoPlay(){
+            autoTimer=setInterval(function(){
+                i++;
+                if(i>4){
+                  i=0;
+                }
+                play(i);
+            },2000);
+        }
+
+      
+        //播放
+        function play(num) {
+            var alpha = 0;
+            i=num;
+            for (var i = 0; i < listLi.length; i++) {
+                listLi[i].className = "";
+                indexLi[i].className="";
+            }
+            listLi[num].className = "current";
+            indexLi[num].className="current";
+
+            clearInterval(timer); //清除之前的
+
+            listLi[num].style.opacity = 0;
+            listLi[num].style.filter = "alpha(opacity=0)";
+
+            timer = setInterval(function() {
+                alpha += 2;
+                if (alpha > 100) {
+                    alpha = 100;
+                }
+                listLi[num].style.opacity = alpha / 100;
+                listLi[num].style.filter = "alpha(opacity=" + alpha + ")";
+                if (alpha === 100) {
+                    clearInterval(timer);
+                }
+
+            }, 20);
+
+        }
+
+        i=0;
+        autoPlay();
+
+
+
+
+
+
+
+
+
+    };
+    </script>
+</body>
+
+</html>

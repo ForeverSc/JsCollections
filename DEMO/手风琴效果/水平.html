@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>水平手风琴效果</title>
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 9;
+    }
+    
+    .container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0 auto;
+    }
+    
+    ul {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+    }
+    
+    li {
+        float:left;
+        width: 20%;
+        height: 100%;
+    }
+
+    li:nth-child(1){
+      background: #1ABC9C;
+    }
+    
+    li:nth-child(2){
+      background: #2ECC71;
+    }
+
+    li:nth-child(3){
+      background: #3498DB;
+    }
+
+    li:nth-child(4){
+      background: #F1C40F;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+    <script src="../jquery.js"></script>
+    <script type="text/javascript">
+        $(".container ul li").click(function(){
+          $(this).siblings("li").animate({width:"20%"},"slow","swing");
+          $(this).animate({width:"30%"},"slow","swing");
+        });
+           
+    </script>
+</body>
+
+</html>

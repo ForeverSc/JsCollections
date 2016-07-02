@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+ 
+
+ </style>
+  
+  
+</head>
+<body>
+<div class="container">
+   <p><input id="all" type="checkbox"><label>全选</label></p>
+   <p><input id="opposite" type="checkbox" >反选</p>
+   <p><input class="check" type="checkbox" >单选1</p>
+   <p><input class="check" type="checkbox" >单选2</p>
+   <p><input class="check" type="checkbox" >单选3</p>
+</div>
+
+<script>
+window.onload=function(){
+  var allBtn=document.getElementById("all");
+  var oppBtn=document.getElementById("opposite");
+  var label=document.getElementsByTagName("label")[0];
+  var checkboxs=document.getElementsByClassName("check");
+  var state=[];
+  for(var i=0;i<checkboxs.length;i++){
+    state[i]=false;
+
+  }
+
+
+
+
+  function isAllChecked(){
+    for(var i=0;i<checkboxs.length;i++){
+      if(state[i]===false){
+        allBtn.checked=false;
+        label.innerHTML="全选";
+        return false;
+      }
+    }
+    allBtn.checked=true;
+    label.innerHTML="全不选";
+    return true;
+  }
+
+
+
+  allBtn.onclick=function(){
+    if(this.checked){
+    for(var i=0;i<checkboxs.length;i++){
+      checkboxs[i].checked=true;
+      state[i]=true;     
+    }
+  }else{
+    for(var i=0;i<checkboxs.length;i++){
+      checkboxs[i].checked=false;
+      state[i]=false;   
+    }
+  }
+  isAllChecked();
+  };
+  oppBtn.onclick=function(){
+    for(var i=0;i<checkboxs.length;i++){
+      if(checkboxs[i].checked){
+        checkboxs[i].checked=false;
+        state[i]=false;
+      }else{
+        checkboxs[i].checked=true;
+        state[i]=true;
+      }
+    }
+    isAllChecked();
+  };
+  for(var i=0;i<checkboxs.length;i++){
+    (function(i){//不要忘记i
+      checkboxs[i].onclick=function(){
+        state[i]=true;
+        console.log(state);     
+       isAllChecked();
+      };
+    })(i);
+  }
+
+
+
+
+};
+
+</script>
+</body>
+</html>
