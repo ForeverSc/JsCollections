@@ -16,7 +16,11 @@ export default function encode(data) {
             result[key] = encode(data[key])
         })
     } else {
-        result = encodeURIComponent(data)
+        if (result === undefined || result === null) {
+            result = '' // 无需encode undefined和null
+        } else {
+            result = encodeURIComponent(data)
+        }
     }
 
     return result
