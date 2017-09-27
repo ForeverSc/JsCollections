@@ -16,10 +16,11 @@ export default function encode(data) {
             result[key] = encode(data[key])
         })
     } else {
-        if (result === undefined || result === null) {
-            result = '' // 无需encode undefined和null
-        } else {
+        // 仅对字符串进行encode操作
+        if (typeof data === 'string') {
             result = encodeURIComponent(data)
+        } else {
+            result = data
         }
     }
 
